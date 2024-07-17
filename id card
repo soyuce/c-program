@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define a structure to hold the ID card information
+struct IDCard {
+    char name[50];
+    int age;
+    char idNumber[20];
+    char department[50];
+    char position[50];
+};
+
+void createIDCard(struct IDCard *card) {
+    printf("Enter name: ");
+    fgets(card->name, sizeof(card->name), stdin);
+    // Remove the newline character that fgets adds
+    card->name[strcspn(card->name, "\n")] = '\0';
+    
+    printf("Enter age: ");
+    scanf("%d", &card->age);
+    getchar();  // Consume the newline character left by scanf
+
+    printf("Enter ID number: ");
+    fgets(card->idNumber, sizeof(card->idNumber), stdin);
+    card->idNumber[strcspn(card->idNumber, "\n")] = '\0';
+    
+    printf("Enter department: ");
+    fgets(card->department, sizeof(card->department), stdin);
+    card->department[strcspn(card->department, "\n")] = '\0';
+    
+    printf("Enter position: ");
+    fgets(card->position, sizeof(card->position), stdin);
+    card->position[strcspn(card->position, "\n")] = '\0';
+}
+
+void displayIDCard(const struct IDCard *card) {
+    printf("\n================ ID Card ================\n");
+    printf("Name: %s\n", card->name);
+    printf("Age: %d\n", card->age);
+    printf("ID Number: %s\n", card->idNumber);
+    printf("Department: %s\n", card->department);
+    printf("Position: %s\n", card->position);
+    printf("=========================================\n");
+}
+
+int main() {
+    struct IDCard card;
+
+    printf("Welcome to the ID Card Creator\n");
+    createIDCard(&card);
+    displayIDCard(&card);
+
+    return 0;
+}
